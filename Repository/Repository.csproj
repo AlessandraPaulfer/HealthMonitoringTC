@@ -536,6 +536,8 @@
     <Compile Include="Entities\UserEntity.cs" />
     <Compile Include="Repositories\ExtraRepository.cs" />
     <Compile Include="Repositories\GlicoRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IMedRepository.cs" />
+    <Compile Include="Repositories\MedRepository.cs" />
     <Compile Include="Repositories\Interfaces\IExtraRepository.cs" />
     <Compile Include="Repositories\Interfaces\IGlicoRepository.cs" />
     <Compile Include="Repositories\Interfaces\IHiperRepository.cs" />

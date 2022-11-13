@@ -67,6 +67,8 @@ namespace APIHM
             services.AddScoped<IGlicoService, GlicoService>();
             services.AddScoped<IExtraRepository, ExtraRepository>();
             services.AddScoped<IExtraService, ExtraService>();
+            services.AddScoped<IMedRepository, MedRepository>();
+            services.AddScoped<IMedService, MedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
