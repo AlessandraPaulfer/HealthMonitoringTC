@@ -1,7 +1,7 @@
 ﻿using APIHM.Services.Interfaces;
 using Common;
 using Repository;
-using Repository.Entity;
+using Repository.Entities;
 using Repository.Repositories.Interfaces;
 
 namespace APIHM.Services

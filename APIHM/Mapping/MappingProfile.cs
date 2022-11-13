@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Common;
-using Repository.Entity;
+using Repository.Entities;
 
 namespace APIHM.Mapper
 {

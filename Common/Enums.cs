@@ -26,6 +26,14 @@ namespace Common
         PreHipertensao = 3,
         HipertensaoEstagioUm = 4,
         HipertensaoEstagioDois = 5,
-        CriseHipertensiva
+        CriseHipertensiva = 6,
+    }
+    public enum CategoriaG
+    {
+        MuitoBaixo = 1,
+        Baixo = 2,
+        Médio = 3,
+        Alto = 4,
+        MuitoAlto = 5
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Common;
-using Repository.Entity;
+using Repository.Entities;
 
 namespace APIHM.Services.Interfaces
 {

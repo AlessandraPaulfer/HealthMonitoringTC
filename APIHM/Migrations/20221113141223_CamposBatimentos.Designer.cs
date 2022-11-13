@@ -12,8 +12,8 @@ using Repository.Context;
 namespace APIHM.Migrations
 {
     [DbContext(typeof(EFContext))]
-    [Migration("20221024152040_NovasTabelas")]
-    partial class NovasTabelas
+    [Migration("20221113141223_CamposBatimentos")]
+    partial class CamposBatimentos
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,10 +32,13 @@ namespace APIHM.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<decimal>("Batimentos")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Desc")
+                    b.Property<string>("Descri")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PersonId")
@@ -43,9 +46,6 @@ namespace APIHM.Migrations
 
                     b.Property<decimal>("Quantity")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -62,27 +62,24 @@ namespace APIHM.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<decimal>("Batimentos")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Categoria")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Desc")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MedId")
-                        .HasColumnType("int");
 
                     b.Property<int>("PersonId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Quantity")
+                    b.Property<decimal>("Value")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MedId");
+                    b.HasIndex("PersonId");
 
                     b.ToTable("Glico");
                 });
@@ -95,16 +92,16 @@ namespace APIHM.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<decimal>("Batimentos")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Categoria")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Diastolica")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("MedId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Media")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("PersonId")
@@ -115,7 +112,7 @@ namespace APIHM.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MedId");
+                    b.HasIndex("PersonId");
 
                     b.ToTable("Hiper");
                 });
@@ -131,7 +128,7 @@ namespace APIHM.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Desc")
+                    b.Property<string>("Descri")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PersonId")
@@ -140,8 +137,8 @@ namespace APIHM.Migrations
                     b.Property<decimal>("Quantity")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -195,9 +192,6 @@ namespace APIHM.Migrations
                     b.Property<string>("ResetHash")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("PersonId")
@@ -219,24 +213,24 @@ namespace APIHM.Migrations
 
             modelBuilder.Entity("Repository.Entities.GlicoEntity", b =>
                 {
-                    b.HasOne("Repository.Entities.MedEntity", "Med")
+                    b.HasOne("Repository.Entities.PersonEntity", "Person")
                         .WithMany()
-                        .HasForeignKey("MedId")
+                        .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Med");
+                    b.Navigation("Person");
                 });
 
             modelBuilder.Entity("Repository.Entities.HiperEntity", b =>
                 {
-                    b.HasOne("Repository.Entities.MedEntity", "Med")
+                    b.HasOne("Repository.Entities.PersonEntity", "Person")
                         .WithMany()
-                        .HasForeignKey("MedId")
+                        .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Med");
+                    b.Navigation("Person");
                 });
 
             modelBuilder.Entity("Repository.Entities.MedEntity", b =>

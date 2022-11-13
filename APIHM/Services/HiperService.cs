@@ -1,5 +1,5 @@
 ﻿using Common;
-using Repository.Entity;
+using Repository.Entities;
 using Repository;
 using Repository.Repositories;
 using APIHM.Services.Interfaces;

@@ -22,13 +22,16 @@ namespace APIHM.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Repository.Entity.ExtraEntity", b =>
+            modelBuilder.Entity("Repository.Entities.ExtraEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<decimal>("Batimentos")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -49,13 +52,19 @@ namespace APIHM.Migrations
                     b.ToTable("Extra");
                 });
 
-            modelBuilder.Entity("Repository.Entity.GlicoEntity", b =>
+            modelBuilder.Entity("Repository.Entities.GlicoEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<decimal>("Batimentos")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Categoria")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -73,13 +82,16 @@ namespace APIHM.Migrations
                     b.ToTable("Glico");
                 });
 
-            modelBuilder.Entity("Repository.Entity.HiperEntity", b =>
+            modelBuilder.Entity("Repository.Entities.HiperEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<decimal>("Batimentos")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Categoria")
                         .HasColumnType("int");
@@ -103,7 +115,7 @@ namespace APIHM.Migrations
                     b.ToTable("Hiper");
                 });
 
-            modelBuilder.Entity("Repository.Entity.MedEntity", b =>
+            modelBuilder.Entity("Repository.Entities.MedEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -133,7 +145,7 @@ namespace APIHM.Migrations
                     b.ToTable("Med");
                 });
 
-            modelBuilder.Entity("Repository.Entity.PersonEntity", b =>
+            modelBuilder.Entity("Repository.Entities.PersonEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -161,7 +173,7 @@ namespace APIHM.Migrations
                     b.ToTable("Persons");
                 });
 
-            modelBuilder.Entity("Repository.Entity.UserEntity", b =>
+            modelBuilder.Entity("Repository.Entities.UserEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -186,9 +198,9 @@ namespace APIHM.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Repository.Entity.ExtraEntity", b =>
+            modelBuilder.Entity("Repository.Entities.ExtraEntity", b =>
                 {
-                    b.HasOne("Repository.Entity.PersonEntity", "Person")
+                    b.HasOne("Repository.Entities.PersonEntity", "Person")
                         .WithMany()
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -197,9 +209,9 @@ namespace APIHM.Migrations
                     b.Navigation("Person");
                 });
 
-            modelBuilder.Entity("Repository.Entity.GlicoEntity", b =>
+            modelBuilder.Entity("Repository.Entities.GlicoEntity", b =>
                 {
-                    b.HasOne("Repository.Entity.PersonEntity", "Person")
+                    b.HasOne("Repository.Entities.PersonEntity", "Person")
                         .WithMany()
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -208,9 +220,9 @@ namespace APIHM.Migrations
                     b.Navigation("Person");
                 });
 
-            modelBuilder.Entity("Repository.Entity.HiperEntity", b =>
+            modelBuilder.Entity("Repository.Entities.HiperEntity", b =>
                 {
-                    b.HasOne("Repository.Entity.PersonEntity", "Person")
+                    b.HasOne("Repository.Entities.PersonEntity", "Person")
                         .WithMany()
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -219,9 +231,9 @@ namespace APIHM.Migrations
                     b.Navigation("Person");
                 });
 
-            modelBuilder.Entity("Repository.Entity.MedEntity", b =>
+            modelBuilder.Entity("Repository.Entities.MedEntity", b =>
                 {
-                    b.HasOne("Repository.Entity.PersonEntity", "Person")
+                    b.HasOne("Repository.Entities.PersonEntity", "Person")
                         .WithMany()
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -230,18 +242,18 @@ namespace APIHM.Migrations
                     b.Navigation("Person");
                 });
 
-            modelBuilder.Entity("Repository.Entity.UserEntity", b =>
+            modelBuilder.Entity("Repository.Entities.UserEntity", b =>
                 {
-                    b.HasOne("Repository.Entity.PersonEntity", "Person")
+                    b.HasOne("Repository.Entities.PersonEntity", "Person")
                         .WithOne("User")
-                        .HasForeignKey("Repository.Entity.UserEntity", "PersonId")
+                        .HasForeignKey("Repository.Entities.UserEntity", "PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Person");
                 });
 
-            modelBuilder.Entity("Repository.Entity.PersonEntity", b =>
+            modelBuilder.Entity("Repository.Entities.PersonEntity", b =>
                 {
                     b.Navigation("User");
                 });

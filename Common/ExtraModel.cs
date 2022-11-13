@@ -9,5 +9,6 @@ namespace Common
         public DateTime Date { get; set; }
         public string Descri { get; set; }
         public decimal Quantity { get; set; }
+        public decimal Batimentos { get; set; }
     }
 }

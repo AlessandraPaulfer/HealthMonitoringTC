@@ -5,16 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repository.Entity
+namespace Repository.Entities
 {
-    public class GlicoEntity
+    public class ExtraEntity
     {
         public int Id { get; set; }
 
-        [ForeignKey("PersonId")]
+        [ForeignKey("Person")]
         public int PersonId { get; set; }
         public PersonEntity Person { get; set; }
         public DateTime Date { get; set; }
-        public decimal Value { get; set; }
+        public string Descri { get; set; }
+        public decimal Quantity { get; set; }
+        public decimal Batimentos { get; set; }
     }
 }

@@ -6,18 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repository.Entity
+namespace Repository.Entities
 {
-    public class HiperEntity
+    public class MedEntity
     {
         public int Id { get; set; }
 
-        [ForeignKey("PersonId")]
+        [ForeignKey("Person")]
         public int PersonId { get; set; }
         public PersonEntity Person { get; set; }
         public DateTime Date { get; set; }
-        public decimal Sistolica { get; set; }
-        public decimal Diastolica { get; set; }
-        public Categoria Categoria { get; set; }
+        public string Descri { get; set; }
+        public decimal Quantity { get; set; }
+        public MedType Type { get; set; }
     }
 }

@@ -6,18 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repository.Entity
+namespace Repository.Entities
 {
-    public class MedEntity
+    public class GlicoEntity
     {
         public int Id { get; set; }
 
-        [ForeignKey("Person")]
+        [ForeignKey("PersonId")]
         public int PersonId { get; set; }
         public PersonEntity Person { get; set; }
         public DateTime Date { get; set; }
-        public string Descri { get; set; }
-        public decimal Quantity { get; set; }
-        public MedType Type { get; set; }
+        public decimal Value { get; set; }
+        public decimal Batimentos { get; set; }
+        public CategoriaG Categoria { get; set; }
     }
 }

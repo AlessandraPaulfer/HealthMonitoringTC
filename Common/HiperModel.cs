@@ -10,5 +10,6 @@ namespace Common
         public decimal Sistolica { get; set; }
         public decimal Diastolica { get; set; }
         public Categoria Categoria { get; set; }
+        public decimal Batimentos { get; set; }
     }
 }

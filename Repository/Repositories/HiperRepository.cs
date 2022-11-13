@@ -1,6 +1,6 @@
 ﻿using Common;
 using Repository.Context;
-using Repository.Entity;
+using Repository.Entities;
 using Repository.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
