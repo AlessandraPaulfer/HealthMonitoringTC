@@ -8,6 +8,8 @@ using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using System.Collections.Generic;
+using Repository.Entities;
+using Repository.Repositories;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,22 +26,39 @@ namespace APIHM.Controllers
             _hiperService = hiperService;
             _mapper = mapper;
         }
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-        // GET api/<TesteController>/5
+
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
+
         [HttpPost("Create")]
-        public IActionResult Add(DataModel data)
+        public IActionResult Add(HiperModel model)
         {
-            return Ok();
+            _hiperService.AddHiper(new HiperModel()
+            {
+                PersonId = model.PersonId,
+                Date = DateTime.UtcNow,
+                Sistolica = model.Sistolica,
+                Diastolica = model.Diastolica,
+                Batimentos = model.Batimentos
+            });
+
+            return Ok(new { response = "Está criado" });
         }
+
+        [HttpPost("GetFromPerson")]
+        public IActionResult GetFromPerson(int id)
+        {
+            var result = _hiperService.GetFromPerson(id);
+            if (result != null)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpPost("GetPeriod")]
         public IActionResult GetPeriod(DataModel data)
         {
@@ -51,16 +70,20 @@ namespace APIHM.Controllers
             return BadRequest(result);
         }
 
-        // PUT api/<TesteController>/5
-        [HttpPut("{id}")]
-        public void Patch(int id, [FromBody] string value)
+        [HttpPatch("Update")]
+        public IActionResult Update(HiperModel hiper)
         {
+            _hiperService.UpdateHiper(hiper);
+
+            return Ok(new { response = "Está atualizado" });
         }
 
-        // DELETE api/<TesteController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete()]
+        public IActionResult Delete(int id)
         {
+            _hiperService.DeleteHiper(id);
+
+            return Ok(new { response = "OK" });
         }
     }
 }

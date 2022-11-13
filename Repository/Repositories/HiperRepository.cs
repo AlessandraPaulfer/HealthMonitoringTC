@@ -53,6 +53,18 @@ namespace Repository.Repositories
             _dataContext.Add(entity);
             _dataContext.SaveChanges();
         }
+        public HiperEntity Get(int id)
+        {
+            return _dataContext.Hiper.FirstOrDefault(o =>
+                o.Id == id);
+        }
+        public void Delete(int id)
+        {
+            var entity = Get(id);
+            _dataContext.Hiper.Remove(entity);
+            _dataContext.SaveChanges();
+
+        }
         public List<HiperEntity> GetFromPerson(int personId)
         {
             return _dataContext.Hiper.Where(c => c.PersonId == personId).ToList();

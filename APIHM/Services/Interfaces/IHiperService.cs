@@ -5,9 +5,10 @@ namespace APIHM.Services.Interfaces
 {
     public interface IHiperService
     {
-        //    int AddPerson(PersonModel model);
-        ////    void UpdatePerson(PersonModel model);
-        //    object HiperPeriod(DataModel dataModel);
+        void AddHiper(HiperModel model);
+        void UpdateHiper(HiperModel model);
+        public void DeleteHiper(int id);
         List<HiperEntity> HiperPeriod(DataModel dataModel);
+        List<HiperEntity> GetFromPerson(int id);
     }
 }

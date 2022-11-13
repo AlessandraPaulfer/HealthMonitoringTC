@@ -16,5 +16,7 @@ namespace Repository.Repositories.Interfaces
         List<HiperEntity> GetYesterday(int personId);
         List<HiperEntity> GetLastWeek(int personId);
         List<HiperEntity> GetLastMonth(int personId);
+        HiperEntity Get(int id);
+        void Delete(int id);
     }
 }
