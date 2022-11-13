@@ -21,15 +21,31 @@ namespace Repository.Repositories
             _dataContext = dataContext;
         }
 
-        public void Add(HiperEntity entity)
+        public void Add(ExtraEntity entity)
         {
             _dataContext.Add(entity);
             _dataContext.SaveChanges();
         }
-        public void Update(HiperEntity entity)
+        public void Update(ExtraEntity entity)
         {
             _dataContext.Add(entity);
             _dataContext.SaveChanges();
+        }
+        public ExtraEntity Get(int id)
+        {
+            return _dataContext.Extra.FirstOrDefault(o =>
+                o.Id == id);
+        }
+        public void Delete(int id)
+        {
+            var entity = Get(id);
+            _dataContext.Extra.Remove(entity);
+            _dataContext.SaveChanges();
+
+        }
+        public List<ExtraEntity> GetFromPerson(int personId)
+        {
+            return _dataContext.Extra.Where(c => c.PersonId == personId).ToList();
         }
     }
 }

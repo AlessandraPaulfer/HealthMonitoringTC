@@ -15,30 +15,34 @@ namespace APIHM.Services
         {
             this.extraRepository = extraRepository;
         }
-
-        //public int AddHiper(PersonModel model)
-        //{
-        //    //PersonEntity entity = new PersonEntity()
-        //    //{
-        //    //    Username = model.Username,
-        //    //    Email = model.Email,
-        //    //    hasG = model.HasG,
-        //    //    hasH = model.HasH,
-        //    //    Date = DateTime.UtcNow,
-        //    //};
-        //    //return hiperRepository.Add(entity);
-        //}
-        //public void UpdateHiper(PersonModel model)
-        //{
-        //    //    PersonEntity entity = new PersonEntity()
-        //    //    {
-        //    //        Id = model.Id,
-        //    //        Username = model.Username,
-        //    //        Email = model.Email,
-        //    //        hasG = model.HasG,
-        //    //        hasH = model.HasH
-        //    //    };
-        //    //    hiperRepository.Update(entity);
-        //}
+        public void AddExtra(ExtraModel model)
+        {
+            ExtraEntity entity = new ExtraEntity()
+            {
+                PersonId = model.PersonId,
+                Date = DateTime.UtcNow,
+                Descri = model.Descri,
+                Quantity = model.Quantity
+            };
+            extraRepository.Add(entity);
+        }
+        public void UpdateExtra(ExtraModel model)
+        {
+            ExtraEntity entity = new ExtraEntity()
+            {
+                Id = model.Id,
+                Descri = model.Descri,
+                Quantity = model.Quantity
+            };
+            extraRepository.Update(entity);
+        }
+        public void DeleteExtra(int id)
+        {
+            extraRepository.Delete(id);
+        }
+        public List<ExtraEntity> GetFromPerson(int id)
+        {
+            return extraRepository.GetFromPerson(id);
+        }
     }
 }

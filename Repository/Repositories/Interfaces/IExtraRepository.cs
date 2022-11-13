@@ -9,7 +9,10 @@ namespace Repository.Repositories.Interfaces
 {
     public interface IExtraRepository
     {
-        void Add(HiperEntity entity);
-        void Update(HiperEntity entity);
+        void Add(ExtraEntity entity);
+        void Update(ExtraEntity entity);
+        List<ExtraEntity> GetFromPerson(int personId);
+        ExtraEntity Get(int id);
+        void Delete(int id);
     }
 }

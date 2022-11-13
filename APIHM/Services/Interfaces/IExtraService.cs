@@ -5,8 +5,9 @@ namespace APIHM.Services.Interfaces
 {
     public interface IExtraService
     {
-        //    int AddPerson(PersonModel model);
-        ////    void UpdatePerson(PersonModel model);
-        //    object HiperPeriod(DataModel dataModel);
+        void AddExtra(ExtraModel model);
+        void UpdateExtra(ExtraModel model);
+        public void DeleteExtra(int id);
+        List<ExtraEntity> GetFromPerson(int id);
     }
 }

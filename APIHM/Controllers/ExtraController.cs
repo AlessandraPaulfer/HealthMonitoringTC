@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using APIHM.Services.Interfaces;
+using AutoMapper;
+using Common;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +11,59 @@ namespace APIHM.Controllers
     [ApiController]
     public class ExtraController : ControllerBase
     {
-        // GET: api/<ExtraController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IExtraService _extraService;
+        public readonly IMapper _mapper;
+        public ExtraController(IExtraService extraService, IMapper mapper)
         {
-            return new string[] { "value1", "value2" };
+            _extraService = extraService;
+            _mapper = mapper;
         }
 
-        // GET api/<ExtraController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<ExtraController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("Create")]
+        public IActionResult Add(ExtraModel model)
         {
+            _extraService.AddExtra(new ExtraModel()
+            {
+                PersonId = model.PersonId,
+                Date = DateTime.UtcNow,
+                Descri = model.Descri,
+                Quantity = model.Quantity
+            });
+
+            return Ok(new { response = "Está criado" });
         }
 
-        // PUT api/<ExtraController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPost("GetFromPerson")]
+        public IActionResult GetFromPerson(int id)
         {
+            var result = _extraService.GetFromPerson(id);
+            if (result != null)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
 
-        // DELETE api/<ExtraController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpPatch("Update")]
+        public IActionResult Update(ExtraModel med)
         {
+            _extraService.UpdateExtra(med);
+
+            return Ok(new { response = "Está atualizado" });
+        }
+
+        [HttpDelete()]
+        public IActionResult Delete(int id)
+        {
+            _extraService.DeleteExtra(id);
+
+            return Ok(new { response = "OK" });
         }
     }
 }
