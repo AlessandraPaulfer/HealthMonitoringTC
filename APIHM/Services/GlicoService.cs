@@ -15,76 +15,36 @@ namespace APIHM.Services
         {
             this.glicoRepository = glicoRepository;
         }
-
-        //public int AddHiper(PersonModel model)
-        //{
-        //    //PersonEntity entity = new PersonEntity()
-        //    //{
-        //    //    Username = model.Username,
-        //    //    Email = model.Email,
-        //    //    hasG = model.HasG,
-        //    //    hasH = model.HasH,
-        //    //    Date = DateTime.UtcNow,
-        //    //};
-        //    //return hiperRepository.Add(entity);
-        //}
-        //public void UpdateHiper(PersonModel model)
-        //{
-        //    //    PersonEntity entity = new PersonEntity()
-        //    //    {
-        //    //        Id = model.Id,
-        //    //        Username = model.Username,
-        //    //        Email = model.Email,
-        //    //        hasG = model.HasG,
-        //    //        hasH = model.HasH
-        //    //    };
-        //    //    hiperRepository.Update(entity);
-        //}
-        //public List<HiperEntity> HiperPeriod(DataModel dataModel)
-        //{
-        //    if (dataModel.Days == Days.Hoje)
-        //    {
-        //        return hiperRepository.GetToday(dataModel.PersonId).ToList();
-        //    }
-        //    else if (dataModel.Days == Days.Ontem)
-        //    {
-        //        return hiperRepository.GetYesterday(dataModel.PersonId).ToList();
-        //    }
-        //    else if (dataModel.Days == Days.UltimaSemana)
-        //    {
-        //        return hiperRepository.GetLastWeek(dataModel.PersonId).ToList();
-        //    }
-        //    else if (dataModel.Days == Days.UltimoMes)
-        //    {
-        //        return hiperRepository.GetLastMonth(dataModel.PersonId).ToList();
-        //    }
-        //    else
-        //    {
-        //        throw new Exception("Não existem dados para esse período");
-        //    }
-        //}
-        //public List<HiperEntity> GetTodayCategorias(DataModel dataModel)
-        //{
-        //    if (dataModel.Days == Days.Hoje)
-        //    {
-        //        return hiperRepository.GetToday(dataModel.PersonId).ToList();
-        //    }
-        //    else if (dataModel.Days == Days.Ontem)
-        //    {
-        //        return hiperRepository.GetYesterday(dataModel.PersonId).ToList();
-        //    }
-        //    else if (dataModel.Days == Days.UltimaSemana)
-        //    {
-        //        return hiperRepository.GetLastWeek(dataModel.PersonId).ToList();
-        //    }
-        //    else if (dataModel.Days == Days.UltimoMes)
-        //    {
-        //        return hiperRepository.GetLastMonth(dataModel.PersonId).ToList();
-        //    }
-        //    else
-        //    {
-        //        throw new Exception("Não existem dados para esse período");
-        //    }
-        //}
+        public void AddGlico(GlicoModel model)
+        {
+            GlicoEntity entity = new GlicoEntity()
+            {
+                PersonId = model.PersonId,
+                Date = DateTime.UtcNow,
+                Value = model.Value,
+                Batimentos = model.Batimentos,
+                Categoria = model.Categoria
+            };
+            glicoRepository.Add(entity);
+        }
+        public void UpdateGlico(GlicoModel model)
+        {
+            GlicoEntity entity = new GlicoEntity()
+            {
+                Id = model.Id,
+                Value = model.Value,
+                Batimentos = model.Batimentos,
+                Categoria = model.Categoria
+            };
+            glicoRepository.Update(entity);
+        }
+        public void DeleteGlico(int id)
+        {
+            glicoRepository.Delete(id);
+        }
+        public List<GlicoEntity> GetFromPerson(int id)
+        {
+            return glicoRepository.GetFromPerson(id);
+        }
     }
 }

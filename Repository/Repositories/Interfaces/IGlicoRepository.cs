@@ -9,7 +9,10 @@ namespace Repository.Repositories.Interfaces
 {
     public interface IGlicoRepository
     {
-        void Add(HiperEntity entity);
-        void Update(HiperEntity entity);
+        void Add(GlicoEntity entity);
+        void Update(GlicoEntity entity);
+        List<GlicoEntity> GetFromPerson(int personId);
+        GlicoEntity Get(int id);
+        void Delete(int id);
     }
 }

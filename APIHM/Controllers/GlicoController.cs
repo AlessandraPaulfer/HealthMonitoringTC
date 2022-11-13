@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using APIHM.Services.Interfaces;
+using AutoMapper;
+using Common;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,36 +11,60 @@ namespace APIHM.Controllers
     [ApiController]
     public class GlicoController : ControllerBase
     {
-        // GET: api/<GlicoController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IGlicoService _glicoService;
+        public readonly IMapper _mapper;
+        public GlicoController(IGlicoService glicoService, IMapper mapper)
         {
-            return new string[] { "value1", "value2" };
+            _glicoService = glicoService;
+            _mapper = mapper;
         }
 
-        // GET api/<GlicoController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<GlicoController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("Create")]
+        public IActionResult Add(GlicoModel model)
         {
+            _glicoService.AddGlico(new GlicoModel()
+            {
+                PersonId = model.PersonId,
+                Date = DateTime.UtcNow,
+                Value = model.Value,
+                Batimentos = model.Batimentos,
+                Categoria = model.Categoria
+            });
+
+            return Ok(new { response = "Está criado" });
         }
 
-        // PUT api/<GlicoController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPost("GetFromPerson")]
+        public IActionResult GetFromPerson(int id)
         {
+            var result = _glicoService.GetFromPerson(id);
+            if (result != null)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
 
-        // DELETE api/<GlicoController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpPatch("Update")]
+        public IActionResult Update(GlicoModel glico)
         {
+            _glicoService.UpdateGlico(glico);
+
+            return Ok(new { response = "Está atualizado" });
+        }
+
+        [HttpDelete()]
+        public IActionResult Delete(int id)
+        {
+            _glicoService.DeleteGlico(id);
+
+            return Ok(new { response = "OK" });
         }
     }
 }

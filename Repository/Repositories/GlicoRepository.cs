@@ -21,15 +21,31 @@ namespace Repository.Repositories
             _dataContext = dataContext;
         }
 
-        public void Add(HiperEntity entity)
+        public void Add(GlicoEntity entity)
         {
             _dataContext.Add(entity);
             _dataContext.SaveChanges();
         }
-        public void Update(HiperEntity entity)
+        public void Update(GlicoEntity entity)
         {
             _dataContext.Add(entity);
             _dataContext.SaveChanges();
+        }
+        public GlicoEntity Get(int id)
+        {
+            return _dataContext.Glico.FirstOrDefault(o =>
+                o.Id == id);
+        }
+        public void Delete(int id)
+        {
+            var entity = Get(id);
+            _dataContext.Glico.Remove(entity);
+            _dataContext.SaveChanges();
+
+        }
+        public List<GlicoEntity> GetFromPerson(int personId)
+        {
+            return _dataContext.Glico.Where(c => c.PersonId == personId).ToList();
         }
     }
 }

@@ -5,8 +5,9 @@ namespace APIHM.Services.Interfaces
 {
     public interface IGlicoService
     {
-        //    int AddPerson(PersonModel model);
-        ////    void UpdatePerson(PersonModel model);
-        //    object HiperPeriod(DataModel dataModel);
+        void AddGlico(GlicoModel model);
+        void UpdateGlico(GlicoModel model);
+        public void DeleteGlico(int id);
+        List<GlicoEntity> GetFromPerson(int id);
     }
 }
