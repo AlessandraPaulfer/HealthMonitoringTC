@@ -6,7 +6,6 @@ $('form').on('submit', function(event) {
         "password": $("#txtPassword").val(),
         "person": {
             "email": $("#txtEmail").val(),
-            "username": $("#txtEmail").val()
         }
     }
 
@@ -17,14 +16,13 @@ $('form').on('submit', function(event) {
         data: JSON.stringify(formData),
         url: "https://localhost:7136/api/User/",
         success: function (result) {
-            if (result.responde = 'ERROR')
+            if (result.response == 'ERROR')
                 alert("Credenciais inválidas")
             else {
-                let baseUrl = $('#btnLogin').data('baseUrl')
+                var baseUrl = $('#btnLogin').data('url');
                 window.location = baseUrl + "?" +
                     "UserId=" + result.userId +
                     "&PersonId=" + result.personId +
-                    "&Username=" + result.username +
                     "&Email=" + result.email;
             }
         },

@@ -12,5 +12,6 @@ namespace Repository
         void Add(UserEntity entity);
         void Update(UserEntity entity);
         UserEntity GetValidateLogin(UserEntity entity);
+        UserEntity Login(UserEntity entity);
     }
 }

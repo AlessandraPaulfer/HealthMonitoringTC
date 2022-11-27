@@ -36,28 +36,28 @@ namespace APIHM.Services
             };   
             repository.Update(entity);
         }
-        public UserModel Login(LoginModel model)
+        public UserModel Login(UserModel model)
         {
             UserEntity entity = new UserEntity()
             {
                 Person = new PersonEntity()
                 {
-                    Email = model.Email,
-                    Username = model.Username,
+                    Email = model.Person.Email
                 },
                 Password = model.Password,
             };
 
-            entity = repository.GetValidateLogin(entity);
+            entity = repository.Login(entity);
 
             if (entity != null)
             {
-                var person = _personrepository.Get(entity.PersonId);
-                model.Email = person.Email;
-                model.Username = person.Username;
+                model.Id = entity.Id;
+                model.PersonId = entity.PersonId;
+                return model;
             }
 
             return null;
+
         }
     }
 }

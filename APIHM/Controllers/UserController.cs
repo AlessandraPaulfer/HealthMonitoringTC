@@ -24,21 +24,22 @@ namespace APIHM.Controllers
             _mapper = mapper;
         }
         [HttpPost]
-        public IActionResult Login(LoginModel user)
+        public IActionResult Login(UserModel user)
         {
             var result = _userService.Login(user);
-            if(result != null) 
+
+            if (result != null)
             {
                 return Ok(new
                 {
                     UserId = result.Id,
                     PersonId = result.PersonId,
-                    Email = result.Person.Email,
-                    Username = result.Person.Username
+                    Email = result.Person.Email
                 });
-
-            } else
+            }
+            else
             {
+                //throw new Exception("ERROR");
                 return Ok(new { response = "ERROR" });
             }
         }

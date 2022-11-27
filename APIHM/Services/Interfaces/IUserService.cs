@@ -5,7 +5,7 @@ namespace APIHM.Services.Interfaces
     public interface IUserService
     {
         void AddUser(UserModel model);
-        UserModel Login(LoginModel user);
+        UserModel Login(UserModel user);
         void UpdateUser(UserModel model);
     }
 }
