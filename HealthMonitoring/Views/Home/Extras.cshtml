@@ -1,4 +1,4 @@
-﻿@model Common.PersonModel
+﻿@model HealthMonitoring.Models.UserViewModel
 
 @{
     Layout = null;
@@ -33,14 +33,41 @@
             <img src="~/tcclogo.png" class="image" alt="logo" />
         </center>
         <a href="/Home"><ion-icon name="home-outline"></ion-icon><span>Home</span></a>
-        <a href="/Home/Usuario"><ion-icon name="people-outline"></ion-icon><span>Usuário</span></a>
+        <a href="/User/Edit"><ion-icon name="people-outline"></ion-icon><span>Usuário</span></a>
         <a href="/Home/Medicamentos"><ion-icon name="medical-outline"></ion-icon><span>Medicamentos</span></a>
         <a href="/Home/Extras"><ion-icon name="extension-puzzle-outline"></ion-icon><span>Extras</span></a>
         <a href="/Login"><ion-icon name="log-out-outline"></ion-icon><span>Sair</span></a>
     </div>
+    <div class="form-popup-bg">
+        <div class="form-container">
+            <button id="btnCloseForm" class="close-button">X</button>
+            <h1>Adicionar Extra</h1>
+            <form action="">
+                @Html.HiddenFor(o => o.UserId)
+                @Html.HiddenFor(o => o.PersonId)
+                <div class="form-group">
+                    <label for="">Data</label>
+                    <input type="date" class="form-control" id="txtDate"/>
+                </div>
+                <div class="form-group">
+                    <label for="">Descrição</label>
+                    <input class="form-control" type="text" id="txtDescri" />
+                </div>
+                <div class="form-group">
+                    <label for="">Quantidade</label>
+                    <input class="form-control" type="text" id="txtQuantity" />
+                </div>
+                <div class="form-group">
+                    <label for="">Batimentos</label>
+                    <input class="form-control" type="text" id="txtBat"/>
+                </div>
+                <button id="btnSubmitForm" onclick="sendForm()">Submit</button>
+            </form>
+        </div>
+    </div>
     <div class="body-card">
         <div class="card-button">
-            <a href="#" class="btn btn-primary">Adicionar</a>
+            <a href="#" class="btn btn-primary" id="btnOpenForm">Adicionar</a>
         </div>
         <br />
         <div class="card" style="width: 18rem;">
@@ -77,5 +104,7 @@
     <!--sidebar final-->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="~/js/extras.js"></script>
+    <script src="~/js/extrasform.js"></script>
 </body>
 </html>
