@@ -46,16 +46,16 @@ namespace APIHM.Controllers
         [HttpPost("Create")]
         public IActionResult Create(UserModel user)
         {
-            UserValidator validator = new UserValidator();
-            ValidationResult results = validator.Validate(user);
-            if (!results.IsValid)
-            {
-                foreach (var item in results.Errors)
-                {
-                    Console.WriteLine("Property " + item.PropertyName + " failed");
-                }
-                return Ok(new { response = "ERROR" });
-            }
+        //    UserValidator validator = new UserValidator();
+        //    ValidationResult results = validator.Validate(user);
+        //    if (!results.IsValid)
+        //    {
+        //        foreach (var item in results.Errors)
+        //        {
+        //            Console.WriteLine("Property " + item.PropertyName + " failed");
+        //        }
+        //        return Ok(new { response = "ERROR" });
+        //    }
             var personId = _personService.AddPerson(new PersonModel()
             {
                 Email = user.Person.Email,

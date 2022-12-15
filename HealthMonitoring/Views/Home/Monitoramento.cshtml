@@ -1,0 +1,230 @@
+﻿@model HealthMonitoring.Models.UserViewModel
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Monitoramento";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HealthMonitoring</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~/css/monitor.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@40,400,0,0" />
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <input type="checkbox" id="check">
+    <!--header começo-->
+    <header>
+        <label for="check">
+            <img src="~/iconv2.png" name="menu-outline" id="sidebar_btn" />
+        </label>
+    </header>
+    <!--header final-->
+    <!--sidebar começo-->
+    <div class="sidebar">
+        <center>
+            <img src="~/tcclogo.png" class="image" alt="logo" />
+        </center>
+        <a href="/Home"><ion-icon name="home-outline"></ion-icon><span>Home</span></a>
+        <a href="/Home/Usuario"><ion-icon name="people-outline"></ion-icon><span>Usuário</span></a>
+        <a href="/Home/Medicamentos"><ion-icon name="medical-outline"></ion-icon><span>Medicamentos</span></a>
+        <a href="/Home/Extras"><ion-icon name="extension-puzzle-outline"></ion-icon><span>Extras</span></a>
+        <a href="/Login"><ion-icon name="log-out-outline"></ion-icon><span>Sair</span></a>
+    </div>
+    <div class="form-popup-bg-glico">
+        <div class="form-container-glico">
+            <button id="btnCloseForm" class="close-button">X</button>
+            <h1>Adicionar Glicose</h1>
+            <form action="">
+                @Html.HiddenFor(o => o.UserId)
+                @Html.HiddenFor(o => o.PersonId)
+                <div class="form-group">
+                    <label for="">Data</label>
+                    <input type="date" class="form-control" id="txtDate" />
+                </div>
+                <div class="form-group">
+                    <label for="">Valor</label>
+                    <input class="form-control" type="text" id="txtValue" />
+                </div>
+                <div class="form-group">
+                    <label for="">Batimentos</label>
+                    <input class="form-control" type="text" id="txtBat" />
+                </div>
+                <div class="form-group">
+                    <label for="">
+                        Categoria (MuitoBaixo = 1,
+                        Baixo = 2,
+                        Médio = 3,
+                        Alto = 4,
+                        MuitoAlto = 5)
+                    </label>
+                    <input class="form-control" type="text" id="txtCate" />
+                </div>
+                <button class="btn btn-primary" id="btnSubmitForm" onclick="sendForm()">Enviar</button>
+            </form>
+        </div>
+    </div><div class="form-popup-bg-editglico">
+        <div class="form-container-editglico">
+            <button id="btnCloseForm" class="close-button">X</button>
+            <h1>Editar Glicose</h1>
+            <form action="">
+                @Html.HiddenFor(o => o.UserId)
+                @Html.HiddenFor(o => o.PersonId)
+                <div class="form-group">
+                    <label for="">Data</label>
+                    <input type="date" class="form-control" id="txtDate" />
+                </div>
+                <div class="form-group">
+                    <label for="">Valor</label>
+                    <input class="form-control" type="text" id="txtValue" />
+                </div>
+                <div class="form-group">
+                    <label for="">Batimentos</label>
+                    <input class="form-control" type="text" id="txtBat" />
+                </div>
+                <div class="form-group">
+                    <label for="">
+                        Categoria (MuitoBaixo = 1,
+                        Baixo = 2,
+                        Médio = 3,
+                        Alto = 4,
+                        MuitoAlto = 5)
+                    </label>
+                    <input class="form-control" type="text" id="txtCate" />
+                </div>
+                <button class="btn btn-primary" id="btnSubmitForm" onclick="sendForm()">Editar</button>
+            </form>
+        </div>
+    </div>
+    <div class="form-popup-bg-hiper">
+        <div class="form-container-hiper">
+            <button id="btnCloseForm" class="close-button">X</button>
+            <h1>Adicionar Hipertensão</h1>
+            <form action="">
+                @Html.HiddenFor(o => o.UserId)
+                @Html.HiddenFor(o => o.PersonId)
+                <div class="form-group">
+                    <label for="">Data</label>
+                    <input type="date" class="form-control" id="txtDate" />
+                </div>
+                <div class="form-group">
+                    <label for="">Sistolica</label>
+                    <input class="form-control" type="text" id="txtDescri" />
+                </div>
+                <div class="form-group">
+                    <label for="">Diastolica</label>
+                    <input class="form-control" type="text" id="txtQuantity" />
+                </div>
+                <div class="form-group">
+                    <label for="">Batimentos</label>
+                    <input class="form-control" type="text" id="txtBat" />
+                </div>
+                <button class="btn btn-primary" id="btnSubmitForm" onclick="sendForm()">Enviar</button>
+            </form>
+        </div>
+    </div><div class="form-popup-bg-edithiper">
+        <div class="form-container-edithiper">
+            <button id="btnCloseForm" class="close-button">X</button>
+            <h1>Editar Hipertensão</h1>
+            <form action="">
+                @Html.HiddenFor(o => o.UserId)
+                @Html.HiddenFor(o => o.PersonId)
+                <div class="form-group">
+                    <label for="">Data</label>
+                    <input type="date" class="form-control" id="txtDate" />
+                </div>
+                <div class="form-group">
+                    <label for="">Sistolica</label>
+                    <input class="form-control" type="text" id="txtDescri" />
+                </div>
+                <div class="form-group">
+                    <label for="">Diastolica</label>
+                    <input class="form-control" type="text" id="txtQuantity" />
+                </div>
+                <div class="form-group">
+                    <label for="">Batimentos</label>
+                    <input class="form-control" type="text" id="txtBat" />
+                </div>
+                <button class="btn btn-primary" id="btnSubmitForm" onclick="sendForm()">Enviar</button>
+            </form>
+        </div>
+    </div>
+    <div class="body-card">
+        <div class="card-button-glico">
+            <a href="#" class="btn btn-primary" id="btnOpenFormGlico">Registrar Glicose</a>
+        </div>
+        <br />
+        <div class="card-button-hiper">
+            <a href="#" class="btn btn-danger" id="btnOpenFormHiper">Registrar Hipertensão</a>
+        </div>
+        <br />
+        <div class="card" style="width: 20rem;">
+            <div class="card-body">
+                <h5 class="card-title">Glicose</h5>
+                <div class="progress">
+                    <div class="progress-bar bg-success" role="progressbar" aria-label="Info striped example" style="width: 20%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <br />
+                <h6 class="card-subtitle mb-2 text-muted">Último registro: 26/10/2022 08:00</h6>
+                <a href="#" class="btn btn-secondary" id="btnOpenFormEditGlico">Editar</a>
+                <a href="#" class="btn btn-danger">Excluir</a>
+            </div>
+        </div>
+        <br />
+        <div class="card" style="width: 20rem;">
+            <div class="card-body">
+                <h5 class="card-title">Hipertensão</h5>
+                <div class="progress">
+                    <div class="progress-bar bg-info" role="progressbar" aria-label="Info striped example" style="width: 40%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <br />
+                <h6 class="card-subtitle mb-2 text-muted">Data: 26/10/2022 09:00</h6>
+                <a href="#" class="btn btn-secondary" id="btnOpenFormEditHiper">Editar</a>
+                <a href="#" class="btn btn-danger">Excluir</a>
+            </div>
+        </div>
+        <br />
+        <div class="card" style="width: 20rem;">
+            <div class="card-body">
+                <h5 class="card-title">Hipertensão</h5>
+                <div class="progress">
+                    <div class="progress-bar bg-warning" role="progressbar" aria-label="Success striped example" style="width: 60%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <br />
+                <h6 class="card-subtitle mb-2 text-muted">Data: 26/10/2022 12:00</h6>
+                <a href="#" class="btn btn-secondary" id="btnOpenFormEditHiper">Editar</a>
+                <a href="#" class="btn btn-danger">Excluir</a>
+            </div>
+        </div>
+        <br />
+        <div class="card" style="width: 20rem;">
+            <div class="card-body">
+                <h5 class="card-title">Glicose</h5>
+                <div class="progress">
+                    <div class="progress-bar bg-danger" role="progressbar" aria-label="Success striped example" style="width: 80%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <br />
+                <h6 class="card-subtitle mb-2 text-muted">Data: 26/10/2022 12:00</h6>
+                <a href="#" class="btn btn-secondary" id="btnOpenFormEditGlico">Editar</a>
+                <a href="#" class="btn btn-danger">Excluir</a>
+            </div>
+        </div>
+    </div>
+    <!--sidebar final-->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="~/js/monitor.js"></script>
+    <script src="~/js/monitorhiper.js"></script>
+    <script src="~/js/monitoreditglico.js"></script>
+    <script src="~/js/monitoredithiper.js"></script>
+    <script src="~/js/moniformglico.js"></script>
+    <script src="~/js/moniformhiper.js"></script>
+</body>
+</html>

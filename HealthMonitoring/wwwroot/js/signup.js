@@ -16,7 +16,8 @@
         username: $("#txtUsername").val(),
         password: $("#txtPassword").val(),
         passwordConfirm: $("#txtPasswordConfirm").val(),
-
+        hasG: $('#checkGlico').val(),
+        hasH: $('#checkHiper').val(),
     }
 
     $.ajax({
@@ -24,7 +25,7 @@
         dataType: "json",
         contentType: "application/json; charset=UTF-8",
         data: JSON.stringify(formData),
-        url: "https://localhost:7136/api/user/create",
+        url: "https://localhost:7136/api/User/Create",
         success: function (result) {
             if (result.responde = '0K')
                 alert("Logado")

@@ -9,8 +9,6 @@ $('form').on('submit', function(event) {
         }
     }
 
-/*    var baseUrl = "/User/Edit"*/
-
     $.ajax({
         type: "POST",
         dataType: "json",
@@ -21,7 +19,6 @@ $('form').on('submit', function(event) {
             if (result.response == 'ERROR')
                 alert("Credenciais inválidas")
             else {
-            //    var baseUrl = $('#btnLogin').data('url');
                 window.location = "/User/Edit?" +
                     "UserId=" + result.userId +
                     "&PersonId=" + result.personId +
